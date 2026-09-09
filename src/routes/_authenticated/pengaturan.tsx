@@ -27,10 +27,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 export const Route = createFileRoute("/_authenticated/pengaturan")({
   head: () => ({
     meta: [
-      { title: "Pengaturan | Purworejo Chatera Assistant" },
-      { name: "description", content: "Pengaturan integrasi Chatera, akun Owner/Admin, dan informasi aplikasi Purworejo Chatera Assistant." },
-      { property: "og:title", content: "Pengaturan | Purworejo Chatera Assistant" },
-      { property: "og:description", content: "Kelola integrasi, akun petugas, dan info aplikasi Purworejo Chatera Assistant." },
+      { title: "Pengaturan | Purworejo chatbot Apps" },
+      { name: "description", content: "Pengaturan integrasi Chatera, akun Owner/Admin, dan informasi aplikasi Purworejo chatbot Apps." },
+      { property: "og:title", content: "Pengaturan | Purworejo chatbot Apps" },
+      { property: "og:description", content: "Kelola integrasi, akun petugas, dan info aplikasi Purworejo chatbot Apps." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

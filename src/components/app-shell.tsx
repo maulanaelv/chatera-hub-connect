@@ -28,16 +28,16 @@ export const APP_NAV = [
 export function SidebarBrand() {
   return (
     <div className="flex h-[76px] items-center gap-3 border-b border-sidebar-border px-5">
-      <img
-        src={assistantMark}
-        alt="Logo Purworejo Chatera Assistant"
-        width={42}
-        height={42}
-        className="size-10 shrink-0 object-contain"
-      />
-      <div className="min-w-0">
-        <p className="truncate text-sm font-bold text-sidebar-foreground">Purworejo</p>
-        <p className="truncate text-xs text-muted-foreground">Chatera Assistant</p>
+        <img
+          src={assistantMark}
+          alt="Logo Purworejo chatbot Apps"
+          width={42}
+          height={42}
+          className="size-10 shrink-0 object-contain"
+        />
+        <div className="min-w-0">
+          <p className="truncate text-sm font-bold text-sidebar-foreground">Purworejo</p>
+          <p className="truncate text-xs text-muted-foreground">chatbot Apps</p>
       </div>
     </div>
   );

@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Purworejo Chatera Assistant" },
+      { title: "Purworejo chatbot Apps" },
       { name: "description", content: "Inbox layanan WhatsApp Kabupaten Purworejo." },
       { name: "author", content: "Pemerintah Kabupaten Purworejo" },
-      { property: "og:title", content: "Purworejo Chatera Assistant" },
+      { property: "og:title", content: "Purworejo chatbot Apps" },
       { property: "og:description", content: "Inbox layanan WhatsApp Kabupaten Purworejo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
