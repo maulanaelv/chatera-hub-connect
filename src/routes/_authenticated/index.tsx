@@ -115,14 +115,6 @@ const STATUS_LABELS: Record<ConversationStatusDb, ConversationStatus> = {
 const FILTERS = ["Semua", "Menunggu Agent", "Agent Aktif", "Bot Aktif", "Selesai"] as const;
 type Filter = (typeof FILTERS)[number];
 
-const NAV_ITEMS = [
-  { label: "Inbox", icon: InboxIcon, to: "/" as const, active: true },
-  { label: "Knowledge Base", icon: BookOpen, to: "/knowledge-base" as const },
-  { label: "Menu Bot", icon: Bot, to: "/menu-bot" as const },
-  { label: "Statistik", icon: BarChart3, to: "/statistik" as const },
-  { label: "Pengaturan", icon: Settings, to: "/pengaturan" as const },
-];
-
 function toThread(
   row: ConversationRow,
   preview: { text: string; created_at: string } | undefined,
