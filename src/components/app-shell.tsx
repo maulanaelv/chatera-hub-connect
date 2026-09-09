@@ -3,27 +3,13 @@ import {
   BarChart3,
   BookOpen,
   Bot,
+  Download,
   Inbox as InboxIcon,
   LogOut,
   Menu,
   Settings,
   ShieldCheck,
 } from "lucide-react";
-import { useState, type ReactNode } from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { initialsOf, useAuth } from "@/lib/auth-context";
-import assistantMark from "@/assets/purworejo-assistant-mark.png";
-
-export const APP_NAV = [
-  { label: "Inbox", icon: InboxIcon, to: "/" as const },
-  { label: "Knowledge Base", icon: BookOpen, to: "/knowledge-base" as const },
-  { label: "Menu Bot", icon: Bot, to: "/menu-bot" as const },
-  { label: "Statistik", icon: BarChart3, to: "/statistik" as const },
-  { label: "Pengaturan", icon: Settings, to: "/pengaturan" as const },
-];
 
 export function SidebarBrand() {
   return (
