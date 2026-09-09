@@ -11,9 +11,9 @@ import assistantMark from "@/assets/purworejo-assistant-mark.png";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Masuk | Purworejo Chatera Assistant" },
+      { title: "Masuk | Purworejo chatbot Apps" },
       { name: "description", content: "Halaman masuk petugas layanan WhatsApp Kabupaten Purworejo." },
-      { property: "og:title", content: "Masuk | Purworejo Chatera Assistant" },
+      { property: "og:title", content: "Masuk | Purworejo chatbot Apps" },
       { property: "og:description", content: "Masuk untuk mengelola inbox WhatsApp Kabupaten Purworejo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -57,8 +57,8 @@ function LoginPage() {
     <main className="grid min-h-dvh place-items-center bg-app-canvas px-4 py-10">
       <Card className="w-full max-w-sm">
         <CardHeader className="items-center text-center">
-          <img src={assistantMark} alt="Logo Purworejo Chatera Assistant" width={56} height={56} className="mx-auto size-14 object-contain" />
-          <CardTitle className="mt-3 text-lg">Purworejo Chatera Assistant</CardTitle>
+          <img src={assistantMark} alt="Logo Purworejo chatbot Apps" width={56} height={56} className="mx-auto size-14 object-contain" />
+          <CardTitle className="mt-3 text-lg">Purworejo chatbot Apps</CardTitle>
           <CardDescription>Masuk dengan akun petugas yang terdaftar</CardDescription>
         </CardHeader>
         <CardContent>

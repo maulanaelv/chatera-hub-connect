@@ -24,10 +24,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/statistik")({
   head: () => ({
     meta: [
-      { title: "Statistik Layanan | Purworejo Chatera Assistant" },
+      { title: "Statistik Layanan | Purworejo chatbot Apps" },
       { name: "description", content: "Ringkasan percakapan, tren pesan masuk, distribusi kategori pertanyaan, dan kinerja agent layanan Kabupaten Purworejo." },
-      { property: "og:title", content: "Statistik Layanan | Purworejo Chatera Assistant" },
-      { property: "og:description", content: "Dashboard statistik percakapan dan kinerja agent Purworejo Chatera Assistant." },
+      { property: "og:title", content: "Statistik Layanan | Purworejo chatbot Apps" },
+      { property: "og:description", content: "Dashboard statistik percakapan dan kinerja agent Purworejo chatbot Apps." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
