@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { DUMMY_BOT_MENUS, KB_CATEGORIES, type BotMenu, type KbCategory } from "@/lib/dummy-knowledge";
 
-export const Route = createFileRoute("/menu-bot")({
+export const Route = createFileRoute("/_authenticated/menu-bot")({
   head: () => ({
     meta: [
       { title: "Menu Bot WhatsApp | Purworejo Chatera Assistant" },

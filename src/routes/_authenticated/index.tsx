@@ -1,20 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
-  BarChart3,
-  BookOpen,
   Bot,
   ChevronDown,
   CircleUserRound,
-  Inbox as InboxIcon,
-  LogOut,
-  Menu,
   MessageCircleMore,
   Search,
   Send,
-  Settings,
-  ShieldCheck,
   UserRoundCheck,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -36,6 +29,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
+  HeaderUser,
+  MobileNav,
+  SidebarBrand,
+  SidebarNav,
+  SidebarStatus,
+} from "@/components/app-shell";
+import {
   messageText,
   useConversationMessages,
   useConversations,
@@ -46,9 +46,10 @@ import {
 } from "@/lib/inbox-data";
 
 import { sendWhatsappText } from "@/lib/chatera-send.functions";
-import assistantMark from "@/assets/purworejo-assistant-mark.png";
 
-export const Route = createFileRoute("/")({
+
+
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Inbox WhatsApp | Purworejo Chatera Assistant" },
@@ -113,14 +114,6 @@ const STATUS_LABELS: Record<ConversationStatusDb, ConversationStatus> = {
 
 const FILTERS = ["Semua", "Menunggu Agent", "Agent Aktif", "Bot Aktif", "Selesai"] as const;
 type Filter = (typeof FILTERS)[number];
-
-const NAV_ITEMS = [
-  { label: "Inbox", icon: InboxIcon, to: "/" as const, active: true },
-  { label: "Knowledge Base", icon: BookOpen, to: "/knowledge-base" as const },
-  { label: "Menu Bot", icon: Bot, to: "/menu-bot" as const },
-  { label: "Statistik", icon: BarChart3, to: "/statistik" as const },
-  { label: "Pengaturan", icon: Settings, to: "/pengaturan" as const },
-];
 
 function toThread(
   row: ConversationRow,
@@ -228,50 +221,24 @@ function Inbox() {
   }
 
 
+  const inboxBadge = (
+    <span className="rounded-full bg-sidebar-primary-foreground/15 px-1.5 text-[10px]">{threads.length}</span>
+  );
+
   return (
     <main className="flex h-dvh min-h-[700px] overflow-hidden bg-app-canvas text-foreground">
       <aside className="hidden w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar lg:flex">
-        <div className="flex h-[76px] items-center gap-3 border-b border-sidebar-border px-5">
-          <img src={assistantMark} alt="Logo Purworejo Chatera Assistant" width={42} height={42} className="size-10 shrink-0 object-contain" />
-          <div className="min-w-0">
-            <p className="truncate text-sm font-bold text-sidebar-foreground">Purworejo</p>
-            <p className="truncate text-xs text-muted-foreground">Chatera Assistant</p>
-          </div>
-        </div>
-        <nav aria-label="Navigasi utama" className="flex-1 space-y-1 px-3 py-5">
-          <p className="px-3 pb-2 text-[10px] font-semibold uppercase text-muted-foreground">Ruang kerja</p>
-          {NAV_ITEMS.map(({ label, icon: Icon, to, active }) => (
-            <Link
-              key={label}
-              to={to}
-              className={cn(
-                "flex h-10 items-center gap-3 rounded-md px-3 text-sm font-medium transition-colors",
-                active ? "bg-sidebar-primary text-sidebar-primary-foreground" : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-              )}
-            >
-              <Icon className="size-4 shrink-0" />
-              <span className="truncate">{label}</span>
-              {label === "Inbox" ? <span className="ml-auto rounded-full bg-sidebar-primary-foreground/15 px-1.5 text-[10px]">{threads.length}</span> : null}
-            </Link>
-          ))}
-
-        </nav>
-        <div className="border-t border-sidebar-border p-4">
-          <div className="flex items-center gap-2.5 rounded-md bg-sidebar-accent px-3 py-3">
-            <ShieldCheck className="size-4 text-sidebar-primary" />
-            <div className="min-w-0">
-              <p className="truncate text-xs font-semibold text-sidebar-foreground">Chatera terhubung</p>
-              <p className="truncate text-[10px] text-muted-foreground">Webhook aktif</p>
-            </div>
-          </div>
-        </div>
+        <SidebarBrand />
+        <SidebarNav badges={{ Inbox: inboxBadge }} />
+        <SidebarStatus />
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="grid h-[76px] shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-border bg-background px-4 sm:px-6">
-          <div className="flex min-w-0 items-center gap-3">
-            <Button variant="ghost" size="icon" className="shrink-0 lg:hidden" onClick={() => setMobileListOpen((value) => !value)} aria-label="Buka daftar percakapan">
-              <Menu />
+          <div className="flex min-w-0 items-center gap-1">
+            <MobileNav badges={{ Inbox: inboxBadge }} />
+            <Button variant="ghost" size="icon" className="shrink-0 md:hidden" onClick={() => setMobileListOpen((value) => !value)} aria-label="Buka daftar percakapan">
+              <MessageCircleMore />
             </Button>
             <div className="min-w-0">
               <h1 className="truncate text-lg font-bold sm:text-xl">Inbox Percakapan</h1>
@@ -279,21 +246,10 @@ function Inbox() {
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <div className="hidden text-right sm:block">
-              <p className="text-xs font-semibold">Rina Wulandari</p>
-              <p className="text-[10px] text-muted-foreground">Administrator</p>
-            </div>
-            <Avatar className="size-9 border border-border">
-              <AvatarFallback className="bg-accent text-xs font-bold text-accent-foreground">RW</AvatarFallback>
-            </Avatar>
-            <Button variant="outline" size="sm" className="hidden gap-2 md:inline-flex">
-              <LogOut className="size-3.5" /> Logout
-            </Button>
-            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Logout">
-              <LogOut />
-            </Button>
+            <HeaderUser />
           </div>
         </header>
+
 
         {loadError ? <div className="border-b border-destructive/20 bg-destructive/10 px-5 py-2 text-xs text-destructive">Gagal memuat sebagian data: {loadError.message}</div> : null}
 

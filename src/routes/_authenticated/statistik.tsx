@@ -21,7 +21,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/statistik")({
+export const Route = createFileRoute("/_authenticated/statistik")({
   head: () => ({
     meta: [
       { title: "Statistik Layanan | Purworejo Chatera Assistant" },
