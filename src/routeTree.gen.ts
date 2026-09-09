@@ -10,33 +10,116 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KnowledgeBaseRouteImport } from './routes/knowledge-base'
+import { Route as MenuBotRouteImport } from './routes/menu-bot'
+import { Route as PengaturanRouteImport } from './routes/pengaturan'
+import { Route as StatistikRouteImport } from './routes/statistik'
+import { Route as ApiWebhooksChateraRouteImport } from './routes/api/webhooks/chatera'
+import { Route as ApiPublicWebhooksChateraRouteImport } from './routes/api/public/webhooks/chatera'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KnowledgeBaseRoute = KnowledgeBaseRouteImport.update({
+  id: '/knowledge-base',
+  path: '/knowledge-base',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuBotRoute = MenuBotRouteImport.update({
+  id: '/menu-bot',
+  path: '/menu-bot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengaturanRoute = PengaturanRouteImport.update({
+  id: '/pengaturan',
+  path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatistikRoute = StatistikRouteImport.update({
+  id: '/statistik',
+  path: '/statistik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksChateraRoute = ApiWebhooksChateraRouteImport.update({
+  id: '/api/webhooks/chatera',
+  path: '/api/webhooks/chatera',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWebhooksChateraRoute =
+  ApiPublicWebhooksChateraRouteImport.update({
+    id: '/api/public/webhooks/chatera',
+    path: '/api/public/webhooks/chatera',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/knowledge-base': typeof KnowledgeBaseRoute
+  '/menu-bot': typeof MenuBotRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/statistik': typeof StatistikRoute
+  '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
+  '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/knowledge-base': typeof KnowledgeBaseRoute
+  '/menu-bot': typeof MenuBotRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/statistik': typeof StatistikRoute
+  '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
+  '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/knowledge-base': typeof KnowledgeBaseRoute
+  '/menu-bot': typeof MenuBotRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/statistik': typeof StatistikRoute
+  '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
+  '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/knowledge-base'
+    | '/menu-bot'
+    | '/pengaturan'
+    | '/statistik'
+    | '/api/webhooks/chatera'
+    | '/api/public/webhooks/chatera'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/knowledge-base'
+    | '/menu-bot'
+    | '/pengaturan'
+    | '/statistik'
+    | '/api/webhooks/chatera'
+    | '/api/public/webhooks/chatera'
+  id:
+    | '__root__'
+    | '/'
+    | '/knowledge-base'
+    | '/menu-bot'
+    | '/pengaturan'
+    | '/statistik'
+    | '/api/webhooks/chatera'
+    | '/api/public/webhooks/chatera'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KnowledgeBaseRoute: typeof KnowledgeBaseRoute
+  MenuBotRoute: typeof MenuBotRoute
+  PengaturanRoute: typeof PengaturanRoute
+  StatistikRoute: typeof StatistikRoute
+  ApiWebhooksChateraRoute: typeof ApiWebhooksChateraRoute
+  ApiPublicWebhooksChateraRoute: typeof ApiPublicWebhooksChateraRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +131,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/knowledge-base': {
+      id: '/knowledge-base'
+      path: '/knowledge-base'
+      fullPath: '/knowledge-base'
+      preLoaderRoute: typeof KnowledgeBaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu-bot': {
+      id: '/menu-bot'
+      path: '/menu-bot'
+      fullPath: '/menu-bot'
+      preLoaderRoute: typeof MenuBotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengaturan': {
+      id: '/pengaturan'
+      path: '/pengaturan'
+      fullPath: '/pengaturan'
+      preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statistik': {
+      id: '/statistik'
+      path: '/statistik'
+      fullPath: '/statistik'
+      preLoaderRoute: typeof StatistikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/chatera': {
+      id: '/api/webhooks/chatera'
+      path: '/api/webhooks/chatera'
+      fullPath: '/api/webhooks/chatera'
+      preLoaderRoute: typeof ApiWebhooksChateraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/webhooks/chatera': {
+      id: '/api/public/webhooks/chatera'
+      path: '/api/public/webhooks/chatera'
+      fullPath: '/api/public/webhooks/chatera'
+      preLoaderRoute: typeof ApiPublicWebhooksChateraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KnowledgeBaseRoute: KnowledgeBaseRoute,
+  MenuBotRoute: MenuBotRoute,
+  PengaturanRoute: PengaturanRoute,
+  StatistikRoute: StatistikRoute,
+  ApiWebhooksChateraRoute: ApiWebhooksChateraRoute,
+  ApiPublicWebhooksChateraRoute: ApiPublicWebhooksChateraRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
