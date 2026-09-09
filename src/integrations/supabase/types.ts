@@ -138,6 +138,7 @@ export type Database = {
           id: string
           is_active: boolean
           keywords: string[]
+          source_document_id: string | null
           title: string
           updated_at: string
         }
@@ -148,6 +149,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           keywords?: string[]
+          source_document_id?: string | null
           title: string
           updated_at?: string
         }
@@ -158,8 +160,53 @@ export type Database = {
           id?: string
           is_active?: boolean
           keywords?: string[]
+          source_document_id?: string | null
           title?: string
           updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_base_source_document_id_fkey"
+            columns: ["source_document_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_documents: {
+        Row: {
+          category: string
+          created_at: string
+          entries_created: number
+          error_message: string | null
+          file_name: string
+          file_type: string
+          id: string
+          status: Database["public"]["Enums"]["knowledge_document_status"]
+          storage_path: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          entries_created?: number
+          error_message?: string | null
+          file_name: string
+          file_type: string
+          id?: string
+          status?: Database["public"]["Enums"]["knowledge_document_status"]
+          storage_path: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          entries_created?: number
+          error_message?: string | null
+          file_name?: string
+          file_type?: string
+          id?: string
+          status?: Database["public"]["Enums"]["knowledge_document_status"]
+          storage_path?: string
         }
         Relationships: []
       }
@@ -244,6 +291,7 @@ export type Database = {
         | "waiting_agent"
         | "agent_active"
         | "closed"
+      knowledge_document_status: "processing" | "done" | "failed"
       message_sender_type: "user" | "bot" | "agent"
     }
     CompositeTypes: {
@@ -378,6 +426,7 @@ export const Constants = {
         "agent_active",
         "closed",
       ],
+      knowledge_document_status: ["processing", "done", "failed"],
       message_sender_type: ["user", "bot", "agent"],
     },
   },
