@@ -14,9 +14,9 @@ import { DUMMY_BOT_MENUS, KB_CATEGORIES, type BotMenu, type KbCategory } from "@
 export const Route = createFileRoute("/_authenticated/menu-bot")({
   head: () => ({
     meta: [
-      { title: "Menu Bot WhatsApp | Purworejo Chatera Assistant" },
+      { title: "Menu Bot WhatsApp | Purworejo chatbot Apps" },
       { name: "description", content: "Atur urutan, label, ikon, dan pesan template tujuh menu utama chatbot WhatsApp Kabupaten Purworejo." },
-      { property: "og:title", content: "Menu Bot WhatsApp | Purworejo Chatera Assistant" },
+      { property: "og:title", content: "Menu Bot WhatsApp | Purworejo chatbot Apps" },
       { property: "og:description", content: "Konfigurasi menu utama chatbot layanan publik Kabupaten Purworejo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

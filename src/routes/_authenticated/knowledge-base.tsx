@@ -37,9 +37,9 @@ import {
 export const Route = createFileRoute("/_authenticated/knowledge-base")({
   head: () => ({
     meta: [
-      { title: "Knowledge Base Chatbot | Purworejo Chatera Assistant" },
+      { title: "Knowledge Base Chatbot | Purworejo chatbot Apps" },
       { name: "description", content: "Kelola daftar pengetahuan jawaban chatbot layanan publik Kabupaten Purworejo per kategori dinas." },
-      { property: "og:title", content: "Knowledge Base Chatbot | Purworejo Chatera Assistant" },
+      { property: "og:title", content: "Knowledge Base Chatbot | Purworejo chatbot Apps" },
       { property: "og:description", content: "Daftar pengetahuan, keywords, dan status aktif jawaban chatbot Kabupaten Purworejo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

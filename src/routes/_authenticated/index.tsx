@@ -52,12 +52,12 @@ import { sendWhatsappText } from "@/lib/chatera-send.functions";
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
-      { title: "Inbox WhatsApp | Purworejo Chatera Assistant" },
+      { title: "Inbox WhatsApp | Purworejo chatbot Apps" },
       {
         name: "description",
         content: "Kelola percakapan WhatsApp warga dan layanan chatbot Kabupaten Purworejo dalam satu inbox.",
       },
-      { property: "og:title", content: "Inbox WhatsApp | Purworejo Chatera Assistant" },
+      { property: "og:title", content: "Inbox WhatsApp | Purworejo chatbot Apps" },
       {
         property: "og:description",
         content: "Inbox layanan WhatsApp resmi Kabupaten Purworejo untuk bot dan petugas.",
