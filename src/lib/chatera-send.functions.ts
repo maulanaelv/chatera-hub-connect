@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 const CHATERA_BASE_URL = "https://api.chatera.id/v1";
 
@@ -17,6 +18,7 @@ function normalizePhone(input: string): string {
 }
 
 export const sendWhatsappText = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator(
     (input: { to: string; text: string; conversationId?: string | null; channelId?: string | null }) => {
       const to = normalizePhone(String(input?.to ?? ""));
@@ -32,7 +34,7 @@ export const sendWhatsappText = createServerFn({ method: "POST" })
       };
     },
   )
-  .handler(async ({ data }): Promise<SendResult> => {
+  .handler(async ({ data, context }): Promise<SendResult> => {
     const apiKey = process.env["CHATERA_API_KEY"];
     if (!apiKey) {
       return { ok: false, status: 500, error: "CHATERA_API_KEY belum diatur di server." };
@@ -86,6 +88,18 @@ export const sendWhatsappText = createServerFn({ method: "POST" })
       null;
 
     // Simpan balasan agar tampil dalam satu percakapan dengan pesan masuk.
+    let agentName = "Operator";
+    try {
+      const profile = await context.supabase
+        .from("users")
+        .select("full_name, email")
+        .eq("id", context.userId)
+        .maybeSingle();
+      agentName = profile.data?.full_name || profile.data?.email || "Operator";
+    } catch {
+      // biarkan nama default bila profil belum tersedia
+    }
+
     try {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
       const { recordOutboundMessage } = await import("@/lib/chatera-events.server");
@@ -96,6 +110,8 @@ export const sendWhatsappText = createServerFn({ method: "POST" })
         messageId,
         senderType: "agent",
         channelId: data.channelId,
+        agentUserId: context.userId,
+        agentName,
       });
       await supabaseAdmin.from("chatera_messages").insert({
         delivery_id: `outbound:${messageId ?? crypto.randomUUID()}`,
@@ -105,7 +121,7 @@ export const sendWhatsappText = createServerFn({ method: "POST" })
         conversation_id: data.conversationId,
         channel_id: data.channelId,
         sender_phone: data.to,
-        sender_name: "Operator",
+        sender_name: agentName,
         content_text: data.text,
         event_timestamp: new Date().toISOString(),
       });
