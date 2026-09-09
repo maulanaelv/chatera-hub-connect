@@ -30,7 +30,17 @@ export const Route = createFileRoute("/pengaturan")({
   component: PengaturanPage,
 });
 
-const WEBHOOK_URL = "https://project--606262d1-7104-4cac-b190-d560feb63457-dev.lovable.app/api/public/webhooks/chatera";
+const WEBHOOK_URL = "https://project--8036df0d-241f-4111-9f81-c27d499588bd-dev.lovable.app/api/public/webhooks/chatera";
+
+function CredentialBadge({ ok, loading }: { ok: boolean | undefined; loading: boolean }) {
+  if (loading) return <Badge variant="secondary">Memeriksa…</Badge>;
+  return ok ? (
+    <Badge className="bg-green-600 text-white hover:bg-green-600">Tersimpan</Badge>
+  ) : (
+    <Badge variant="destructive">Belum diatur</Badge>
+  );
+}
+
 
 type Agent = { name: string; initials: string; role: "Admin" | "Agent"; email: string; online: boolean };
 
