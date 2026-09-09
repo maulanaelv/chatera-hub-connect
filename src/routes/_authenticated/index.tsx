@@ -1,20 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
-  BarChart3,
-  BookOpen,
   Bot,
   ChevronDown,
   CircleUserRound,
-  Inbox as InboxIcon,
-  LogOut,
-  Menu,
   MessageCircleMore,
   Search,
   Send,
-  Settings,
-  ShieldCheck,
   UserRoundCheck,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -36,6 +29,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
+  HeaderUser,
+  MobileNav,
+  SidebarBrand,
+  SidebarNav,
+  SidebarStatus,
+} from "@/components/app-shell";
+import {
   messageText,
   useConversationMessages,
   useConversations,
@@ -46,7 +46,8 @@ import {
 } from "@/lib/inbox-data";
 
 import { sendWhatsappText } from "@/lib/chatera-send.functions";
-import assistantMark from "@/assets/purworejo-assistant-mark.png";
+
+
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
