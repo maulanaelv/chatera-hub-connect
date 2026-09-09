@@ -335,6 +335,8 @@ export async function recordOutboundMessage(
     messageId: string | null;
     senderType: "bot" | "agent";
     channelId?: string | null;
+    agentUserId?: string | null;
+    agentName?: string | null;
   },
 ): Promise<void> {
   const phone = normalizePhone(input.phone);
@@ -358,6 +360,9 @@ export async function recordOutboundMessage(
     sender_type: input.senderType,
     content_type: "text",
     content: { text: { body: input.text } } as never,
+    agent_user_id: input.agentUserId ?? null,
+    agent_name: input.agentName ?? null,
     created_at: now,
   });
 }
+
