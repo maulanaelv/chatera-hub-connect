@@ -1,6 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Copy, Eye, EyeOff, Plus, Upload } from "lucide-react";
+import { Check, Copy, Plus, Upload } from "lucide-react";
 import { useState } from "react";
+import { getChateraCredentialStatus } from "@/lib/chatera-credentials.functions";
+
 import { AppShell } from "@/components/app-shell";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
