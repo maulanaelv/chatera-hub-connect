@@ -9,38 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as KnowledgeBaseRouteImport } from './routes/knowledge-base'
-import { Route as MenuBotRouteImport } from './routes/menu-bot'
-import { Route as PengaturanRouteImport } from './routes/pengaturan'
-import { Route as StatistikRouteImport } from './routes/statistik'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedKnowledgeBaseRouteImport } from './routes/_authenticated/knowledge-base'
+import { Route as AuthenticatedMenuBotRouteImport } from './routes/_authenticated/menu-bot'
+import { Route as AuthenticatedPengaturanRouteImport } from './routes/_authenticated/pengaturan'
+import { Route as AuthenticatedStatistikRouteImport } from './routes/_authenticated/statistik'
 import { Route as ApiWebhooksChateraRouteImport } from './routes/api/webhooks/chatera'
 import { Route as ApiPublicWebhooksChateraRouteImport } from './routes/api/public/webhooks/chatera'
 
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const KnowledgeBaseRoute = KnowledgeBaseRouteImport.update({
-  id: '/knowledge-base',
-  path: '/knowledge-base',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MenuBotRoute = MenuBotRouteImport.update({
+const AuthenticatedKnowledgeBaseRoute =
+  AuthenticatedKnowledgeBaseRouteImport.update({
+    id: '/knowledge-base',
+    path: '/knowledge-base',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMenuBotRoute = AuthenticatedMenuBotRouteImport.update({
   id: '/menu-bot',
   path: '/menu-bot',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PengaturanRoute = PengaturanRouteImport.update({
+const AuthenticatedPengaturanRoute = AuthenticatedPengaturanRouteImport.update({
   id: '/pengaturan',
   path: '/pengaturan',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const StatistikRoute = StatistikRouteImport.update({
+const AuthenticatedStatistikRoute = AuthenticatedStatistikRouteImport.update({
   id: '/statistik',
   path: '/statistik',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ApiWebhooksChateraRoute = ApiWebhooksChateraRouteImport.update({
   id: '/api/webhooks/chatera',
@@ -55,30 +67,34 @@ const ApiPublicWebhooksChateraRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/knowledge-base': typeof KnowledgeBaseRoute
-  '/menu-bot': typeof MenuBotRoute
-  '/pengaturan': typeof PengaturanRoute
-  '/statistik': typeof StatistikRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/login': typeof LoginRoute
+  '/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
+  '/menu-bot': typeof AuthenticatedMenuBotRoute
+  '/pengaturan': typeof AuthenticatedPengaturanRoute
+  '/statistik': typeof AuthenticatedStatistikRoute
   '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
   '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/knowledge-base': typeof KnowledgeBaseRoute
-  '/menu-bot': typeof MenuBotRoute
-  '/pengaturan': typeof PengaturanRoute
-  '/statistik': typeof StatistikRoute
+  '/login': typeof LoginRoute
+  '/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
+  '/menu-bot': typeof AuthenticatedMenuBotRoute
+  '/pengaturan': typeof AuthenticatedPengaturanRoute
+  '/statistik': typeof AuthenticatedStatistikRoute
+  '/': typeof AuthenticatedIndexRoute
   '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
   '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/knowledge-base': typeof KnowledgeBaseRoute
-  '/menu-bot': typeof MenuBotRoute
-  '/pengaturan': typeof PengaturanRoute
-  '/statistik': typeof StatistikRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authenticated/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
+  '/_authenticated/menu-bot': typeof AuthenticatedMenuBotRoute
+  '/_authenticated/pengaturan': typeof AuthenticatedPengaturanRoute
+  '/_authenticated/statistik': typeof AuthenticatedStatistikRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
   '/api/webhooks/chatera': typeof ApiWebhooksChateraRoute
   '/api/public/webhooks/chatera': typeof ApiPublicWebhooksChateraRoute
 }
@@ -86,6 +102,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
     | '/knowledge-base'
     | '/menu-bot'
     | '/pengaturan'
@@ -94,70 +111,84 @@ export interface FileRouteTypes {
     | '/api/public/webhooks/chatera'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/login'
     | '/knowledge-base'
     | '/menu-bot'
     | '/pengaturan'
     | '/statistik'
+    | '/'
     | '/api/webhooks/chatera'
     | '/api/public/webhooks/chatera'
   id:
     | '__root__'
-    | '/'
-    | '/knowledge-base'
-    | '/menu-bot'
-    | '/pengaturan'
-    | '/statistik'
+    | '/_authenticated'
+    | '/login'
+    | '/_authenticated/knowledge-base'
+    | '/_authenticated/menu-bot'
+    | '/_authenticated/pengaturan'
+    | '/_authenticated/statistik'
+    | '/_authenticated/'
     | '/api/webhooks/chatera'
     | '/api/public/webhooks/chatera'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  KnowledgeBaseRoute: typeof KnowledgeBaseRoute
-  MenuBotRoute: typeof MenuBotRoute
-  PengaturanRoute: typeof PengaturanRoute
-  StatistikRoute: typeof StatistikRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
   ApiWebhooksChateraRoute: typeof ApiWebhooksChateraRoute
   ApiPublicWebhooksChateraRoute: typeof ApiPublicWebhooksChateraRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/knowledge-base': {
-      id: '/knowledge-base'
+    '/_authenticated/knowledge-base': {
+      id: '/_authenticated/knowledge-base'
       path: '/knowledge-base'
       fullPath: '/knowledge-base'
-      preLoaderRoute: typeof KnowledgeBaseRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedKnowledgeBaseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/menu-bot': {
-      id: '/menu-bot'
+    '/_authenticated/menu-bot': {
+      id: '/_authenticated/menu-bot'
       path: '/menu-bot'
       fullPath: '/menu-bot'
-      preLoaderRoute: typeof MenuBotRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedMenuBotRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/pengaturan': {
-      id: '/pengaturan'
+    '/_authenticated/pengaturan': {
+      id: '/_authenticated/pengaturan'
       path: '/pengaturan'
       fullPath: '/pengaturan'
-      preLoaderRoute: typeof PengaturanRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedPengaturanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/statistik': {
-      id: '/statistik'
+    '/_authenticated/statistik': {
+      id: '/_authenticated/statistik'
       path: '/statistik'
       fullPath: '/statistik'
-      preLoaderRoute: typeof StatistikRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedStatistikRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/webhooks/chatera': {
       id: '/api/webhooks/chatera'
@@ -176,12 +207,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedKnowledgeBaseRoute: typeof AuthenticatedKnowledgeBaseRoute
+  AuthenticatedMenuBotRoute: typeof AuthenticatedMenuBotRoute
+  AuthenticatedPengaturanRoute: typeof AuthenticatedPengaturanRoute
+  AuthenticatedStatistikRoute: typeof AuthenticatedStatistikRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedKnowledgeBaseRoute: AuthenticatedKnowledgeBaseRoute,
+  AuthenticatedMenuBotRoute: AuthenticatedMenuBotRoute,
+  AuthenticatedPengaturanRoute: AuthenticatedPengaturanRoute,
+  AuthenticatedStatistikRoute: AuthenticatedStatistikRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  KnowledgeBaseRoute: KnowledgeBaseRoute,
-  MenuBotRoute: MenuBotRoute,
-  PengaturanRoute: PengaturanRoute,
-  StatistikRoute: StatistikRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
   ApiWebhooksChateraRoute: ApiWebhooksChateraRoute,
   ApiPublicWebhooksChateraRoute: ApiPublicWebhooksChateraRoute,
 }

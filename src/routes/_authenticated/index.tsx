@@ -48,7 +48,7 @@ import {
 import { sendWhatsappText } from "@/lib/chatera-send.functions";
 import assistantMark from "@/assets/purworejo-assistant-mark.png";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Inbox WhatsApp | Purworejo Chatera Assistant" },

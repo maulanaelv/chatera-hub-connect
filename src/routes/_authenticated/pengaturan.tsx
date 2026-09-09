@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/pengaturan")({
+export const Route = createFileRoute("/_authenticated/pengaturan")({
   head: () => ({
     meta: [
       { title: "Pengaturan | Purworejo Chatera Assistant" },

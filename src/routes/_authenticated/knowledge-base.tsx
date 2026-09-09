@@ -34,7 +34,7 @@ import {
   type KnowledgeRow,
 } from "@/lib/knowledge-base";
 
-export const Route = createFileRoute("/knowledge-base")({
+export const Route = createFileRoute("/_authenticated/knowledge-base")({
   head: () => ({
     meta: [
       { title: "Knowledge Base Chatbot | Purworejo Chatera Assistant" },
