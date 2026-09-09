@@ -52,7 +52,16 @@ const DUMMY_AGENTS: Agent[] = [
 ];
 
 function PengaturanPage() {
-  const [showKey, setShowKey] = useState(false);
+  const {
+    data: status,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ["chatera-credential-status"],
+    queryFn: () => getChateraCredentialStatus(),
+  });
+
   const [copied, setCopied] = useState(false);
   const [agents, setAgents] = useState<Agent[]>(DUMMY_AGENTS);
   const [agentOpen, setAgentOpen] = useState(false);
