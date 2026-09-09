@@ -73,25 +73,26 @@ function PengaturanPage() {
       <div className="mx-auto max-w-4xl space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Integrasi Chatera</CardTitle>
-            <CardDescription>Kredensial gateway WhatsApp dan alamat webhook penerima pesan</CardDescription>
+            <CardTitle className="text-base">Kredensial Chatera</CardTitle>
+            <CardDescription>
+              Kunci API dan secret webhook disimpan sebagai secret di server. Nilainya tidak pernah
+              disimpan di database maupun ditampilkan di halaman ini.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="api-key">API Key</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="api-key"
-                  type={showKey ? "text" : "password"}
-                  defaultValue="cht_live_9f2Kx7LmQp4sR8dN1vY6"
-                  readOnly
-                  className="font-mono text-xs sm:text-sm"
-                />
-                <Button type="button" variant="outline" size="icon" aria-label={showKey ? "Sembunyikan API key" : "Tampilkan API key"} onClick={() => setShowKey((v) => !v)}>
-                  {showKey ? <EyeOff /> : <Eye />}
-                </Button>
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border p-3">
+              <div className="min-w-0">
+                <p className="text-sm font-medium">CHATERA_API_KEY</p>
+                <p className="text-xs text-muted-foreground">Dipakai server untuk mengirim balasan WhatsApp.</p>
               </div>
-              <p className="text-xs text-muted-foreground">Kunci sesungguhnya dikelola sebagai secret server, bukan ditampilkan di sini.</p>
+              <CredentialBadge ok={status?.apiKeyConfigured} loading={isLoading} />
+            </div>
+            <div className="flex items-center justify-between gap-3 rounded-md border border-border p-3">
+              <div className="min-w-0">
+                <p className="text-sm font-medium">CHATERA_WEBHOOK_SECRET</p>
+                <p className="text-xs text-muted-foreground">Dipakai server untuk memverifikasi pesan masuk.</p>
+              </div>
+              <CredentialBadge ok={status?.webhookSecretConfigured} loading={isLoading} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="webhook-url">URL Webhook</Label>
@@ -103,8 +104,12 @@ function PengaturanPage() {
               </div>
               <p className="text-xs text-muted-foreground">Pasang URL ini di pengaturan webhook Chatera dengan event message.inbound.</p>
             </div>
+            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
+              Periksa ulang status
+            </Button>
           </CardContent>
         </Card>
+
 
         <Card>
           <CardHeader className="flex flex-row items-start justify-between gap-3">
