@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      bot_menus: {
+        Row: {
+          body: string
+          category: string
+          created_at: string
+          emoji: string
+          id: string
+          is_active: boolean
+          key: string
+          label: string
+          parent_id: string | null
+          path: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          category?: string
+          created_at?: string
+          emoji?: string
+          id?: string
+          is_active?: boolean
+          key?: string
+          label?: string
+          parent_id?: string | null
+          path: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          category?: string
+          created_at?: string
+          emoji?: string
+          id?: string
+          is_active?: boolean
+          key?: string
+          label?: string
+          parent_id?: string | null
+          path?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bot_menus_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "bot_menus"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chatera_messages: {
         Row: {
           channel_id: string | null
