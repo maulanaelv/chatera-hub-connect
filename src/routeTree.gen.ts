@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedExportRouteImport } from './routes/_authenticated/export'
 import { Route as AuthenticatedKnowledgeBaseRouteImport } from './routes/_authenticated/knowledge-base'
 import { Route as AuthenticatedMenuBotRouteImport } from './routes/_authenticated/menu-bot'
 import { Route as AuthenticatedPengaturanRouteImport } from './routes/_authenticated/pengaturan'
@@ -31,6 +32,11 @@ const LoginRoute = LoginRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExportRoute = AuthenticatedExportRouteImport.update({
+  id: '/export',
+  path: '/export',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedKnowledgeBaseRoute =
@@ -69,6 +75,7 @@ const ApiPublicWebhooksChateraRoute =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
+  '/export': typeof AuthenticatedExportRoute
   '/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
   '/menu-bot': typeof AuthenticatedMenuBotRoute
   '/pengaturan': typeof AuthenticatedPengaturanRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/export': typeof AuthenticatedExportRoute
   '/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
   '/menu-bot': typeof AuthenticatedMenuBotRoute
   '/pengaturan': typeof AuthenticatedPengaturanRoute
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/export': typeof AuthenticatedExportRoute
   '/_authenticated/knowledge-base': typeof AuthenticatedKnowledgeBaseRoute
   '/_authenticated/menu-bot': typeof AuthenticatedMenuBotRoute
   '/_authenticated/pengaturan': typeof AuthenticatedPengaturanRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/export'
     | '/knowledge-base'
     | '/menu-bot'
     | '/pengaturan'
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/export'
     | '/knowledge-base'
     | '/menu-bot'
     | '/pengaturan'
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/export'
     | '/_authenticated/knowledge-base'
     | '/_authenticated/menu-bot'
     | '/_authenticated/pengaturan'
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/export': {
+      id: '/_authenticated/export'
+      path: '/export'
+      fullPath: '/export'
+      preLoaderRoute: typeof AuthenticatedExportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/knowledge-base': {
@@ -208,6 +227,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedExportRoute: typeof AuthenticatedExportRoute
   AuthenticatedKnowledgeBaseRoute: typeof AuthenticatedKnowledgeBaseRoute
   AuthenticatedMenuBotRoute: typeof AuthenticatedMenuBotRoute
   AuthenticatedPengaturanRoute: typeof AuthenticatedPengaturanRoute
@@ -216,6 +236,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedExportRoute: AuthenticatedExportRoute,
   AuthenticatedKnowledgeBaseRoute: AuthenticatedKnowledgeBaseRoute,
   AuthenticatedMenuBotRoute: AuthenticatedMenuBotRoute,
   AuthenticatedPengaturanRoute: AuthenticatedPengaturanRoute,
