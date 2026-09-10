@@ -1,3 +1,4 @@
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   BarChart3,
@@ -10,6 +11,22 @@ import {
   Settings,
   ShieldCheck,
 } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { initialsOf, useAuth } from "@/lib/auth-context";
+import assistantMark from "@/assets/purworejo-assistant-mark.png";
+
+export const APP_NAV = [
+  { label: "Inbox", icon: InboxIcon, to: "/" },
+  { label: "Knowledge Base", icon: BookOpen, to: "/knowledge-base" },
+  { label: "Menu Bot", icon: Bot, to: "/menu-bot" },
+  { label: "Statistik", icon: BarChart3, to: "/statistik" },
+  { label: "Export Data", icon: Download, to: "/export" },
+  { label: "Pengaturan", icon: Settings, to: "/pengaturan" },
+] as const;
+
 
 export function SidebarBrand() {
   return (
